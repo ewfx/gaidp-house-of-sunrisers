@@ -1,0 +1,20 @@
+# Rule 1: Transaction amount validation
+if row['Transaction_Amount'] != row['Reported_Amount']:
+    flag_transaction(row, "Amount mismatch")
+
+# Rule 2: Negative balance check
+if row['Account_Balance'] < 0 and not is_overdraft_account(row):
+    flag_transaction(row, "Negative balance without overdraft")
+
+# Rule 3: Currency validation
+valid_currencies = ['USD', 'EUR', 'GBP', 'JPY'] # etc.
+if row['Currency'] not in valid_currencies:
+    flag_transaction(row, "Invalid currency code")
+
+# Rule 4: Future date check
+if row['Transaction_Date'] > current_date:
+    flag_transaction(row, "Future-dated transaction")
+
+# Rule 5: Large cross-border transactions
+if row['Country'] != home_country and row['Transaction_Amount'] > 10000:
+    flag_transaction(row, "Large cross-border transaction")

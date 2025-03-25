@@ -1,0 +1,5 @@
+1. Transaction amounts must match reported amounts exactly
+2. Account balances cannot be negative unless for overdraft accounts
+3. All transactions must be in valid ISO currency codes
+4. Future-dated transactions should be flagged
+5. Cross-border transactions over $10,000 require special review
